@@ -1,0 +1,67 @@
+services:
+
+  backend:
+    container_name: task_backend
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - ./backend:/var/www/backend
+      - ./docker/supervisor/supervisord.conf:/etc/supervisord.conf
+      - ./docker/php/local.ini:/usr/local/etc/php/config/local.ini
+    depends_on:
+      - pgsql
+    networks:
+      - laravel-app
+
+  nginx:
+    image: nginx:alpine
+    container_name: task_nginx
+    tty: true
+    ports:
+      - 8000:80
+    volumes:
+      - ./backend:/var/www/backend
+      - ./docker/nginx:/etc/nginx/conf.d
+    depends_on:
+      - backend
+    networks:
+      - laravel-app
+
+  pgsql:
+    container_name: task_postgres
+    image: postgres:16
+    restart: always
+    volumes:
+      - task_pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    networks:
+      - laravel-app
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: task_pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "8888:80"
+    depends_on:
+      - pgsql
+    networks:
+      - laravel-app
+
+networks:
+  laravel-app:
+    driver: bridge
+
+volumes:
+  task_pgdata:
+  pgadmin_data:
