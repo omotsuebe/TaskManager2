@@ -204,7 +204,7 @@ Follow these steps
 ```
 
 **Delete Task:** 
-- `DELETE /api/v1/tasks/{id}`
+- `DELETE /api/v1/tasks/{task}`
 
 **Headers:**
 ```json
