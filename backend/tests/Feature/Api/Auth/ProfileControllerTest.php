@@ -51,10 +51,7 @@ class ProfileControllerTest extends TestCase
             ->assertStatus(422)
             ->assertJson([
                 'message' => 'Validation failed',
-                'errors' => [
-                    'name' => ['The name field is required.'],
-                    'username' => ['The username field is required.'],
-                ],
+                'data' => ['The name field is required.','The username field is required.'],
             ]);
     }
 }

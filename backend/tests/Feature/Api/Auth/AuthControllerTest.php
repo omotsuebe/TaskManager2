@@ -41,12 +41,13 @@ class AuthControllerTest extends TestCase
             ->assertStatus(422)
             ->assertJson([
                 'message' => 'Validation failed',
-                'errors' => [
-                    'name' => ['The name field is required.'],
-                    'email' => ['The email field must be a valid email address.'],
-                    'username' => ['The username field is required.'],
-                    'password' => ['The password field must be at least 8 characters.'],
-                ],
+                'data' => [
+                    'The name field is required.',
+                    'The email field must be a valid email address.',
+                    'The username field is required.',
+                    'The password field must be at least 8 characters.'
+            ],
+   
             ]);
     }
 
