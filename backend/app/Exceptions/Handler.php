@@ -21,8 +21,10 @@ class Handler
         // Handle validation exceptions
         $exceptions->render(function (ValidationException $e, Request $request) {
             return response()->json([
+                'result' => false,
+                'status' => 'error',
                 'message' => 'Validation failed',
-                'errors' => $e->errors(),
+                'data' => array_merge(...array_values($e->errors())),
             ], 422);
         });
 

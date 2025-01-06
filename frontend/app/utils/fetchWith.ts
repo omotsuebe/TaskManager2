@@ -31,8 +31,8 @@ export function handleApiErrors(errorData: ValidationModel): never {
     if (errorData?.data) {
         if (Array.isArray(errorData.data)) {
             // Extract and join all error messages from the `data` array
-            const messages = errorData.data.map((err: ValidationData) => err.msg).join('. ');
-            Logger.log(`Validation Error (400): ${messages || errorData.message || 'An unknown error occurred.'}`);
+            const messages = errorData.data.map((err: ValidationData) => err).join(', ');
+            Logger.log(`Validation Error Array (400): ${messages || errorData.message || 'An unknown error occurred.'}`);
             throw new ValidationError(messages || errorData.message || 'Validation error occurred.', 400);
         } else {
             const message = errorData.data.msg || errorData.message;

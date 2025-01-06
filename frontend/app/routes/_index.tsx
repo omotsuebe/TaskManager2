@@ -1,14 +1,16 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
+import { useAuth } from "~/context/auth";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Task Management App" },
+    { name: "description", content: "Welcome to Tasks Manager" },
   ];
 };
 
 export default function Index() {
+  const { user} = useAuth();
   return (
     <div className="bg-white">
         <header className="absolute inset-x-0 top-0 z-50">
@@ -24,8 +26,11 @@ export default function Index() {
               <Link to="#" className="text-sm/6 font-semibold text-gray-900">Features</Link>
             </div>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            {/* <Link to="/dashboard" className="text-sm font-semibold text-gray-900"> Dashboard</Link> */}
-            <Link to="/signin" className="text-sm/6 font-semibold text-gray-900">Sign In <span aria-hidden="true">&rarr;</span></Link>
+              {user ? (
+              <Link to="/dashboard" className="text-sm font-semibold text-gray-900">Dashboard</Link>
+              ) : (
+              <Link to="/signin" className="text-sm/6 font-semibold text-gray-900">Sign In <span aria-hidden="true">&rarr;</span></Link>
+              )}
             </div>
 
           </nav>
@@ -40,12 +45,11 @@ export default function Index() {
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
               <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                Announcing our next round of funding. <Link to="#" className="font-semibold text-indigo-600"><span className="absolute inset-0" aria-hidden="true"></span>Read more <span aria-hidden="true">&rarr;</span></Link>
+              Want to see how it works. <Link to="/dashboard" className="font-semibold text-indigo-600"><span className="absolute inset-0" aria-hidden="true"></span>Learn more <span aria-hidden="true">&rarr;</span></Link>
               </div>
             </div>
             <div className="text-center">
-              <h1 className="text-balance text-2xl font-semibold tracking-tight text-gray-900 sm:text-xl">Data to
-                enrich your online business</h1>
+              <h1 className="text-balance text-2xl font-semibold tracking-tight text-gray-900 sm:text-xl">Manage your day to day tasks with ease</h1>
               <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">Get started today</p>
             </div>
           </div>
