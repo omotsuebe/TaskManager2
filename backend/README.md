@@ -14,7 +14,7 @@ others.
 - Instruct Pint to fix code style issues (`./vendor/bin/pint`)
 - Support build and run with docker
 
-## Project Setup
+## Project Setup Backend
 
 ### Prerequisites
 
@@ -77,11 +77,8 @@ Follow these steps
 
 ### Usage
 
-**Search and Filter**
+**The Application API**
 
-Use the search and filtering features to retrieve tasks based on:
-
-- **Search Queries:** Match titles or descriptions.
 - **Filters:** Filter by status, priority, shared.
 - **Pagination:** Navigate through tasks with a maximum of 20 tasks per page.
 
@@ -98,75 +95,242 @@ Use the search and filtering features to retrieve tasks based on:
 - `limit:` Number of articles per page (default: 20, max: 20).
 - `page:` Current page number (default: 1)
 
-**Sample API Response**
-When fetching tasks, the API returns a structured JSON response:
+**Headers:**
+```json
+{
+    "Authorization": "Bearer user-access-token"
+}
+```
+**Optional Params:**
+```json
+{
+    "shared": "shared",
+    "status": "complete",
+    "priority": "high",
+    "limit": 20,
+    "page": 1
+}
+```
+
+**Response:**
 ```json
 {
     "result": true,
     "status": "success",
-    "message": "Task fetched",
+    "message": "Tasks fetched",
     "data": {
         "tasks": [
             {
-                "id": 9,
-                "title": "edite now",
+                "id": 1,
+                "title": "Sample Task",
                 "category": "General",
-                "priority": "low",
-                "sort_order": false,
-                "created_at": "2025-01-06T04:14:52.000000Z",
-                "updated_at": "2025-01-06T04:14:52.000000Z",
+                "priority": "high",
                 "status": "incomplete",
-                "canDelete": true,
+                "created_at": "2023-10-01T12:00:00.000000Z",
+                "updated_at": "2023-10-01T12:00:00.000000Z",
                 "user": {
                     "id": 1,
-                    "name": "Omo heze",
-                    "email": "code@appwiz.dev",
-                    "username": "coder",
-                    "updated_at": "2025-01-04T20:27:15.000000Z",
-                    "created_at": "2025-01-03T23:35:38.000000Z"
+                    "name": "John Doe",
+                    "email": "john.doe@example.com",
+                    "username": "johndoe"
                 }
-            },
+            }
         ],
         "meta": {
             "current_page": 1,
-            "last_page": 10,
+            "last_page": 1,
             "per_page": 10,
-            "total": 100
+            "total": 1
         }
     }
 }
 ```
 
-- `GET /api/v1/tasks/{id}`
+**Create Task:** 
+- `POST /api/v1/tasks`
+
+**Headers:**
 ```json
 {
-    "result": true,
-    "status": "success",
-    "message": "Article fetched",
-    "data": {
-        "tasks": {
-            "id": 9,
-                "title": "edite now",
-                "category": "General",
-                "priority": "low",
-                "sort_order": false,
-                "created_at": "2025-01-06T04:14:52.000000Z",
-                "updated_at": "2025-01-06T04:14:52.000000Z",
-                "status": "incomplete",
-                "canDelete": true,
-                "user": {
-                    "id": 1,
-                    "name": "Omo heze",
-                    "email": "code@appwiz.dev",
-                    "username": "coder",
-                    "updated_at": "2025-01-04T20:27:15.000000Z",
-                    "created_at": "2025-01-03T23:35:38.000000Z"
-                }
-        }
-    }
+    "Authorization": "Bearer user-access-token"
 }
-
 ```
+
+**Body:**
+```json
+{
+    "title": "New Task",
+    "category": "Frontend",
+    "priority": "medium"
+}
+```
+
+**Update Task:** 
+- `PUT /api/v1/tasks/{task}`
+
+**Headers:**
+```json
+{
+    "Authorization": "Bearer user-access-token"
+}
+```
+
+**Body:**
+```json
+{
+    "title": "Updated Task",
+    "category": "Database",
+    "priority": "high",
+    "status": "complete"
+}
+```
+
+**Share Task:** 
+- `PUT /api/v1/tasks/share`
+
+**Headers:**
+```json
+{
+    "Authorization": "Bearer user-access-token"
+}
+```
+
+**Body:**
+```json
+{
+    "tasks": [1],
+    "username": "anotheruser"
+}
+```
+
+**Delete Task:** 
+- `DELETE /api/v1/tasks/{id}`
+
+**Headers:**
+```json
+{
+    "Authorization": "Bearer user-access-token"
+}
+```
+
+### User Authentication
+
+**Register User:** 
+- `POST /api/v1/auth/register`
+```json
+{
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "password": "password",
+    "username": "username"
+}
+```
+
+**Login User:** 
+- `POST /api/v1/auth/login`
+```json
+{
+    "email": "john.doe@example.com",
+    "password": "password"
+}
+```
+
+### Email Verification
+
+**Verify Email with OTP:** 
+- `POST /api/v1/auth/verify-email`
+```json
+{
+    "email": "john.doe@example.com",
+    "code": "123456"
+}
+```
+
+**Resend OTP for Email Verification:** 
+- `POST /api/v1/auth/resend-code`
+```json
+{
+    "email": "john.doe@example.com"
+}
+```
+
+### Forgot Password
+
+**Request Password Reset:** 
+- `POST /api/v1/auth/forgot-password`
+```json
+{
+    "email": "john.doe@example.com"
+}
+```
+
+**Reset Password:** 
+- `POST /api/v1/auth/reset-password`
+```json
+{
+    "code": "otp",
+    "email": "john.doe@example.com",
+    "password": "newpassword"
+}
+```
+
+### Manage Profile
+
+**Fetch Authenticated User:** 
+- `GET /api/v1/auth/profile`
+
+**Headers:**
+```json
+{
+    "Authorization": "Bearer user-access-token"
+}
+```
+
+**Update User Profile:** 
+- `PUT /api/v1/auth/update-profile`
+
+**Body:**
+```json
+{
+    "name": "John Doe",
+    "username": "newusername"
+}
+```
+**Headers:**
+```json
+{
+    "Authorization": "Bearer user-access-token"
+}
+```
+
+**Change User Password:** 
+- `PUT /api/v1/auth/change-password`
+
+**Body:**
+```json
+{
+    "current_password": "currentpassword",
+    "new_password": "newpassword"
+}
+```
+
+**Headers:**
+```json
+{
+    "Authorization": "Bearer user-access-token"
+}
+```
+
+**Logout User:** 
+- `POST /api/v1/auth/logout`
+
+**Headers:**
+```json
+{
+    "Authorization": "Bearer user-access-token"
+}
+```
+
 For the complete documention for
 Authentication and Task(CRUD)
 [Visit the Posman Docs for more](https://documenter.getpostman.com/view/8772623/2sAXjF8aZQ)
@@ -193,4 +357,4 @@ php artisan test
 For docker:
 ```php
 docker exec task_backend php artisan test
-
+```

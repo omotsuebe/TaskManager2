@@ -364,7 +364,7 @@ docker exec task_backend php artisan test
 ### Prerequisites
 
 - Node.js >= 20.x
-- npm or yarn
+- npm
 
 ### Installation
 
@@ -377,20 +377,12 @@ docker exec task_backend php artisan test
     ```sh
     npm install
     ```
-    or
-    ```sh
-    yarn install
-    ```
 
 ### Running the Application
 
 To start the development server, use the following command:
 ```sh
 npm run dev
-```
-or
-```sh
-yarn dev
 ```
 
 The application will be available at `http://localhost:3000`.
@@ -401,14 +393,6 @@ To build the application for production, use the following command:
 ```sh
 npm run build
 ```
-or
-```sh
-yarn build
-```
-
-### Serving the Production Build
-
-The production SPA build will be available at `build/client/` folder.
 
 ### Usage
 
@@ -421,13 +405,22 @@ The production SPA build will be available at `build/client/` folder.
 - **Delete Task:** Remove a task from the list.
 - **Filters:** Filter by status, priority, shared.
 
+
+### Deployment
+
+The production SPA build will be available at `build/client/` folder.
+
+You can then serve your app from any HTTP server of your choosing. The server should be configured to serve multiple paths from a single root `/index.html` file (commonly called "SPA fallback"). Other steps may be required if the server doesn't directly support this functionality.
+
+For a simple example, you could use [sirv-cli](https://www.npmjs.com/package/sirv-cli):
+
+```shellscript
+npx sirv-cli build/client/ --single
+```
+
 ### Running Tests
 
 To run the tests, use the following command:
 ```sh
 npm test
-```
-or
-```sh
-yarn test
 ```
