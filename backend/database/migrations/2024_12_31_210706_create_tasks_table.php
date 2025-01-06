@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('title',100);
-            $table->string('category',100)->nullable();
+            $table->string('title', 100);
+            $table->string('category', 100)->nullable();
             $table->enum('priority', ['low', 'medium', 'high']);
-            $table->enum('status',['complete','incomplete'])->default('incomplete');
+            $table->enum('status', ['complete', 'incomplete'])->default('incomplete');
             $table->tinyInteger('sort_order')->nullable()->default(0);
             $table->timestamps();
         });

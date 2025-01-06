@@ -4,9 +4,8 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Support\HtmlString;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class AppNotification extends Notification
 {
@@ -36,11 +35,11 @@ class AppNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-        ->subject($this->message['subject'])
-        ->from($this->message['from'])
-        ->greeting($this->message['greeting'])
-        ->line(new HtmlString($this->message['body']))
-        ->line(new HtmlString($this->message['code']));
+            ->subject($this->message['subject'])
+            ->from($this->message['from'])
+            ->greeting($this->message['greeting'])
+            ->line(new HtmlString($this->message['body']))
+            ->line(new HtmlString($this->message['code']));
     }
 
     /**

@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 class BaseApiController extends BaseController
 {
     protected $defaultErrorMessage = 'An unexpected error occurred. Please try again later.';
-    
+
     protected function jsonSuccessWithData($data, string $message = 'Success', int $statusCode = 200): JsonResponse
     {
         return response()->json([
@@ -49,5 +49,4 @@ class BaseApiController extends BaseController
             'user' => ['name' => $user->name, 'email' => $user->email, 'username' => $user->username],
         ]);
     }
-
 }

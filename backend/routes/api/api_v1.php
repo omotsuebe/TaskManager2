@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Auth\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\TaskController;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
@@ -22,7 +22,6 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-
 Route::prefix('tasks')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', [TaskController::class, 'index']);
@@ -33,7 +32,3 @@ Route::prefix('tasks')->group(function () {
         Route::delete('/{task}', [TaskController::class, 'destroy']);
     });
 });
-
-
-
-

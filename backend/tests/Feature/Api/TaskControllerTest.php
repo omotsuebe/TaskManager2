@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Api;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class TaskControllerTest extends TestCase
 {
@@ -20,7 +19,7 @@ class TaskControllerTest extends TestCase
             'password' => bcrypt('Password123!'),
             'email_verified_at' => now(),
         ]);
-    }   
+    }
 
     public function test_get_all_tasks(): void
     {
@@ -88,7 +87,7 @@ class TaskControllerTest extends TestCase
             ]);
     }
 
-   public function test_get_all_tasks_with_filters(): void
+    public function test_get_all_tasks_with_filters(): void
     {
 
         $response = $this->actingAs($this->authUser())->getJson('/api/v1/tasks?status=completed&priority=high&category=work');
@@ -227,5 +226,4 @@ class TaskControllerTest extends TestCase
 
         $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
     }
-    
 }

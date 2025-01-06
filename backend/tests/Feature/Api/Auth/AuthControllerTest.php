@@ -2,9 +2,8 @@
 
 namespace Tests\Feature\Api\Auth;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
@@ -39,7 +38,7 @@ class AuthControllerTest extends TestCase
         ];
 
         $this->postJson('/api/v1/auth/register', $data)
-        ->assertStatus(422)
+            ->assertStatus(422)
             ->assertJson([
                 'message' => 'Validation failed',
                 'errors' => [
@@ -64,7 +63,7 @@ class AuthControllerTest extends TestCase
 
         $data = [
             'email' => $email,
-            'password' => 'Password123!'
+            'password' => 'Password123!',
         ];
 
         $this->postJson('/api/v1/auth/login', $data)
@@ -84,7 +83,7 @@ class AuthControllerTest extends TestCase
                 'status' => false,
                 'status' => 'error',
                 'message' => 'Validation error: The provided credentials are incorrect.',
-                'errors' => []
+                'errors' => [],
             ]);
     }
 
@@ -264,10 +263,9 @@ class AuthControllerTest extends TestCase
 
         $token = $response->json('access_token');
 
-        $this->withHeader('Authorization', 'Bearer ' . $token)
+        $this->withHeader('Authorization', 'Bearer '.$token)
             ->postJson('/api/v1/auth/logout')
             ->assertStatus(200)
             ->assertJson(['status' => 'success']);
     }
-
 }

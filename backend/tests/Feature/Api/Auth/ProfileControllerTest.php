@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\Api\Auth;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ProfileControllerTest extends TestCase
 {
@@ -19,7 +18,7 @@ class ProfileControllerTest extends TestCase
             'password' => bcrypt('Password123!'),
             'email_verified_at' => now(),
         ]);
-    }   
+    }
 
     public function test_get_user_profile(): void
     {

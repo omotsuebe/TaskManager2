@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Task;
-use Illuminate\Auth\Access\Response;
+use App\Models\User;
 
 class TaskPolicy
 {
@@ -18,14 +17,11 @@ class TaskPolicy
 
     /**
      * Determine whether the user can view the model.
-     * @param User $user
-     * @param task $task
-     * @return bool
      */
     public function view(User $user, Task $task): bool
     {
         return $user->id === $task->user_id;
-        
+
     }
 
     /**
@@ -51,5 +47,4 @@ class TaskPolicy
     {
         return $user->id === $task->user_id;
     }
-
 }

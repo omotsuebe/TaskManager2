@@ -16,9 +16,8 @@ class Task extends Model
         'category',
         'status',
         'priority',
-        'sort_order'
+        'sort_order',
     ];
-
 
     public function user(): BelongsTo
     {

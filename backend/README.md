@@ -194,5 +194,3 @@ For docker:
 ```php
 docker exec task_backend php artisan test
 
-### Frontend
-export const API_BASE_URL = "http://localhost:8000/api/v1";

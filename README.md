@@ -14,7 +14,7 @@ others.
 - Instruct Pint to fix code style issues (`./vendor/bin/pint`)
 - Support build and run with docker
 
-## Project Setup
+## Project Setup Backend
 
 ### Prerequisites
 
@@ -174,7 +174,7 @@ Authentication and Task(CRUD)
 ### Email Notification
 Sending notifications can take time, especially if the channel needs to make an external API call to deliver the notification. To speed up your application's response time, let your notification be queued by adding the `ShouldQueue` interface and `Queueable` trait to your class.
 
-```json
+```php
 class AppNotification extends Notification implements ShouldQueue
 {
     use Queueable;

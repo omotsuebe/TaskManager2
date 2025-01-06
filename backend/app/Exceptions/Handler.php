@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -36,7 +36,7 @@ class Handler
         // Handle unauthorized exceptions
         $exceptions->render(function (AuthenticationException $e, Request $request) {
             return response()->json([
-            'message' => 'Unauthorized',
+                'message' => 'Unauthorized',
             ], 401);
         });
 

@@ -11,7 +11,7 @@ class SharedTask extends Model
     protected $fillable = [
         'task_id',
         'shared_with',
-        'shared_by'
+        'shared_by',
     ];
 
     public function task()
