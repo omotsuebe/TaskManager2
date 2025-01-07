@@ -1,4 +1,4 @@
-## Tasks Manager
+## Tasks Manager Using Laravel and React
 
 Full-stack web application that allows users to create and share task lists with
 others.
