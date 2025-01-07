@@ -64,10 +64,11 @@ To serve the application locally, use the following command
 Follow these steps
 
  - Clone the repository
+ - `cp .env.example .env`
  - `docker-compose build`
  - `docker-compose up -d` 
  - `docker exec task_backend composer install`
- - `cp .env.example .env`
+ - `cp backend/.env.example backend/.env`
  - `docker exec task_backend php artisan key:generate`
  - `docker exec task_backend php  artisan  migrate`
  - `docker exec task_backend php  artisan  cache:clear`
@@ -396,6 +397,7 @@ npm run build
 - **Using docker to build**
 
 `docker build -f docker/react/Dockerfile -t taskfront-app .`
+
 `docker run -p 80:80 taskfront-app`
 
 ### Usage
