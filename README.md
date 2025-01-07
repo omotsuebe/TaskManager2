@@ -33,7 +33,7 @@ others.
     ```
 ### Using Docker Compose (Recommended)
 
-- Follow these steps
+Follow these steps
 
  - `cp .env.example .env`
  - `Adjust the settings if you like`
@@ -42,7 +42,6 @@ others.
  - `docker exec task_backend composer install`
  - `cp backend/.env.example backend/.env`
  - `Adjust the settings if you like`
- - `enter the require Setup`
  - `docker exec task_backend php artisan key:generate`
  - `docker exec task_backend php  artisan  migrate`
  - `docker exec task_backend php  artisan  cache:clear`
