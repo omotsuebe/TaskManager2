@@ -1,4 +1,4 @@
-## Tasks Manager
+## Tasks Manager Using Laravel
 
 Full-stack web application that allows users to create and share task lists with
 others.
@@ -8,8 +8,8 @@ others.
 - Create, read, edit and delete tasks
 - Filter tasks by status, priority and shared.
 - Share tasks created with others using their username
-- Pagination with a maximum limit of 20 articles per page.
-- Configurable article fetching limits and API keys.
+- Pagination with a maximum limit of 20 tasks per page.
+- Configurable tasks fetching limits and API keys.
 - Continuous Integration (CI): Automated tests run during every pull request or push.
 - Instruct Pint to fix code style issues (`./vendor/bin/pint`)
 - Support build and run with docker
@@ -31,7 +31,28 @@ others.
     git clone https://github.com/hezecom/TaskManager2.git
     cd TaskManager2
     ```
+### Using Docker Compose (Recommended)
 
+2. Follow these steps
+
+ - `cp .env.example .env`
+ - `Adjust the settings if you like`
+ - `docker-compose build`
+ - `docker-compose up -d` 
+ - `docker exec task_backend composer install`
+ - `cp backend/.env.example backend/.env`
+ - `Adjust the settings if you like`
+ - `enter the require Setup`
+ - `docker exec task_backend php artisan key:generate`
+ - `docker exec task_backend php  artisan  migrate`
+ - `docker exec task_backend php  artisan  cache:clear`
+ - `docker exec task_backend php  artisan  optimize`
+ - Access: `http://localhost:8000`
+ - Terminate: `docker-compose down`
+
+
+ ### Or setup without docker
+ Please note you will need to setup the database environment yourself
 2. Install dependencies:
     ```sh
     composer install
@@ -52,28 +73,13 @@ others.
      php artisan migrate
     ```
 
-### Serving the Application
-To serve the application locally, use the following command
+6. To serve the application locally, use the following command
    ```sh
     php artisan serve
 
     The application will be available at http://localhost:8000
    ```
-### Or Using Docker for Backend
 
-Follow these steps
-
- - Clone the repository
- - `docker-compose build`
- - `docker-compose up -d` 
- - `docker exec task_backend composer install`
- - `cp .env.example .env`
- - `docker exec task_backend php artisan key:generate`
- - `docker exec task_backend php  artisan  migrate`
- - `docker exec task_backend php  artisan  cache:clear`
- - `docker exec task_backend php  artisan  optimize`
- - Access: `http://localhost:8000`
- - Terminate: `docker-compose down`
 
 ### Usage
 
@@ -92,7 +98,7 @@ Follow these steps
 - `shared:` Search keywords.
 - `status:` Filter by category (e.g `complete` | `incomplete`).
 - `priority:` Filter by source (`high` | `medium` | `low`).
-- `limit:` Number of articles per page (default: 20, max: 20).
+- `limit:` Number of tasks per page (default: 20, max: 20).
 - `page:` Current page number (default: 1)
 
 **Headers:**
@@ -204,7 +210,7 @@ Follow these steps
 ```
 
 **Delete Task:** 
-- `DELETE /api/v1/tasks/{id}`
+- `DELETE /api/v1/tasks/{task}`
 
 **Headers:**
 ```json

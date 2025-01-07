@@ -31,7 +31,28 @@ others.
     git clone https://github.com/hezecom/TaskManager2.git
     cd TaskManager2
     ```
+### Using Docker Compose (Recommended)
 
+2. Follow these steps
+
+ - `cp .env.example .env`
+ - `Adjust the settings if you like`
+ - `docker-compose build`
+ - `docker-compose up -d` 
+ - `docker exec task_backend composer install`
+ - `cp backend/.env.example backend/.env`
+ - `Adjust the settings if you like`
+ - `enter the require Setup`
+ - `docker exec task_backend php artisan key:generate`
+ - `docker exec task_backend php  artisan  migrate`
+ - `docker exec task_backend php  artisan  cache:clear`
+ - `docker exec task_backend php  artisan  optimize`
+ - Access: `http://localhost:8000`
+ - Terminate: `docker-compose down`
+
+
+ ### Or setup without docker
+ Please note you will need to setup the database environment yourself
 2. Install dependencies:
     ```sh
     composer install
@@ -52,29 +73,13 @@ others.
      php artisan migrate
     ```
 
-### Serving the Application
-To serve the application locally, use the following command
+6. To serve the application locally, use the following command
    ```sh
     php artisan serve
 
     The application will be available at http://localhost:8000
    ```
-### Or Using Docker for Backend
 
-Follow these steps
-
- - Clone the repository
- - `cp .env.example .env`
- - `docker-compose build`
- - `docker-compose up -d` 
- - `docker exec task_backend composer install`
- - `cp backend/.env.example backend/.env`
- - `docker exec task_backend php artisan key:generate`
- - `docker exec task_backend php  artisan  migrate`
- - `docker exec task_backend php  artisan  cache:clear`
- - `docker exec task_backend php  artisan  optimize`
- - Access: `http://localhost:8000`
- - Terminate: `docker-compose down`
 
 ### Usage
 
