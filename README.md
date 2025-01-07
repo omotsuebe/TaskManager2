@@ -393,6 +393,10 @@ To build the application for production, use the following command:
 ```sh
 npm run build
 ```
+- **Using docker to build**
+
+`docker build -f docker/react/Dockerfile -t taskfront-app .`
+`docker run -p 80:80 taskfront-app`
 
 ### Usage
 
