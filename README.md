@@ -8,8 +8,8 @@ others.
 - Create, read, edit and delete tasks
 - Filter tasks by status, priority and shared.
 - Share tasks created with others using their username
-- Pagination with a maximum limit of 20 articles per page.
-- Configurable article fetching limits and API keys.
+- Pagination with a maximum limit of 20 tasks per page.
+- Configurable tasks fetching limits and API keys.
 - Continuous Integration (CI): Automated tests run during every pull request or push.
 - Instruct Pint to fix code style issues (`./vendor/bin/pint`)
 - Support build and run with docker
@@ -93,7 +93,7 @@ Follow these steps
 - `shared:` Search keywords.
 - `status:` Filter by category (e.g `complete` | `incomplete`).
 - `priority:` Filter by source (`high` | `medium` | `low`).
-- `limit:` Number of articles per page (default: 20, max: 20).
+- `limit:` Number of tasks per page (default: 20, max: 20).
 - `page:` Current page number (default: 1)
 
 **Headers:**
