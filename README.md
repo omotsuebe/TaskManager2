@@ -26,14 +26,14 @@ others.
 
 ### Installation
 
-1. Clone the repository:
+- Clone the repository:
     ```sh
     git clone https://github.com/hezecom/TaskManager2.git
     cd TaskManager2
     ```
 ### Using Docker Compose (Recommended)
 
-2. Follow these steps
+- Follow these steps
 
  - `cp .env.example .env`
  - `Adjust the settings if you like`
@@ -53,27 +53,28 @@ others.
 
  ### Or setup without docker
  Please note you will need to setup the database environment yourself
-2. Install dependencies:
+
+- Install dependencies:
     ```sh
     composer install
     ```
 
-3. Copy the [.env.example](http://_vscodecontentref_/0) file to [.env](http://_vscodecontentref_/1) and configure your environment variables:
+- Copy the [.env.example](http://_vscodecontentref_/0) file to [.env](http://_vscodecontentref_/1) and configure your environment variables:
     ```sh
     cp .env.example .env
     ```
 
-4. Generate an application key:
+- Generate an application key:
     ```sh
     php artisan key:generate
     ```
 
-5. Run database migrations:
+- Run database migrations:
     ```sh
      php artisan migrate
     ```
 
-6. To serve the application locally, use the following command
+- To serve the application locally, use the following command
    ```sh
     php artisan serve
 
